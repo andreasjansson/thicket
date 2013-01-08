@@ -6,15 +6,16 @@
 class InputAudio
 {
 public:
-  InputAudio(char *filename);
+  InputAudio(char *filename, const int bufferSize);
   ~InputAudio();
-  bool getSample(double *sample);
+  bool getSamples(double *sample);
   const int getChannels(void);
   const int getSampleRate(void);
 
 private:
   SNDFILE *infile;
   SF_INFO info;
+  const int bufferSize;
 };
 
 #endif

@@ -6,8 +6,7 @@ class Agent
 public:
   Agent();
   ~Agent();
-  void step(const double sample);
-  double getPos(void) const;
+  double step(const double sample);
 
 private:
   double vel;

@@ -10,18 +10,7 @@ Agent::~Agent()
 
 }
 
-void Agent::step(const double sample)
-{
-  
-}
-
-double Agent::getPos() const
+double Agent::step(const double sample)
 {
   return pos;
 }
-
-
-
-
-
-

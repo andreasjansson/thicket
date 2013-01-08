@@ -1,14 +1,15 @@
 #include "inputaudio.hpp"
 
-InputAudio::InputAudio(char *filename)
+InputAudio::InputAudio(char *filename, const int bufferSize)
+  : bufferSize(bufferSize)
 {
   infile = sf_open(filename, SFM_READ, &info);
 }
 
-bool InputAudio::getSample(double *sample)
+bool InputAudio::getSamples(double *sample)
 {
-  int nread = sf_read_double(infile, sample, info.channels);
-  return nread == info.channels;
+  int nread = sf_read_double(infile, sample, info.channels * bufferSize);
+  return nread == info.channels * bufferSize;
 }
 
 const int InputAudio::getChannels(void)

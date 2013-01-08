@@ -4,7 +4,9 @@
 
 using std::exception;
 
-OutputAudio::OutputAudio(const char *filename, const int channels, const int sampleRate)
+OutputAudio::OutputAudio(const char *filename, const int channels,
+                         const int sampleRate, const int bufferSize)
+  : bufferSize(bufferSize)
 {
   info.channels = channels;
   info.samplerate = sampleRate;
@@ -16,9 +18,9 @@ OutputAudio::OutputAudio(const char *filename, const int channels, const int sam
   }
 }
 
-void OutputAudio::putSample(const double *sample)
+void OutputAudio::putSamples(const double *samples)
 {
-  sf_write_double(outfile, sample, info.channels);
+  sf_write_double(outfile, samples, info.channels * bufferSize);
 }
 
 OutputAudio::~OutputAudio(void)
