@@ -7,10 +7,14 @@ public:
   Agent();
   ~Agent();
   double step(const double sample);
+  const int minFQ;
+  const int maxFQ;
+  const double damping;
 
 private:
   double vel;
   double pos;
+  double fq;
 };
 
 #endif

@@ -1,5 +1,8 @@
 #include <string>
 #include <vector>
+#include <cstdlib>
+#include <ctime>
+#include <cstdio>
 #include "agent.hpp"
 #include "inputaudio.hpp"
 #include "outputaudio.hpp"
@@ -9,8 +12,15 @@ using std::string;
 
 int main(int argc, char *argv[])
 {
-  const int NAGENTS = 2;
+  const int NAGENTS = 40;
   const int BUFFER_SIZE = 4096;
+
+  if(argc < 2) {
+    fprintf(stderr, "2 arguments required\n");
+    return 1;
+  }
+
+  srand(time(NULL));
 
   InputAudio in(argv[1], BUFFER_SIZE);
   int channels = in.getChannels();
@@ -39,13 +49,3 @@ int main(int argc, char *argv[])
 
   return 0;
 }
-
-
-
-
-
-
-
-
-
-
