@@ -12,7 +12,7 @@ using std::string;
 
 int main(int argc, char *argv[])
 {
-  const int NAGENTS = 4;
+  const int NAGENTS = 5;
   const int BUFFER_SIZE = 4096;
 
   if(argc < 2) {
@@ -25,7 +25,11 @@ int main(int argc, char *argv[])
   InputAudio in(argv[1], BUFFER_SIZE);
   int channels = in.getChannels();
   OutputAudio out(argv[2], channels, in.getSampleRate(), BUFFER_SIZE);
-  vector<Agent> agents(NAGENTS * channels);
+  vector<Agent> agents;
+  agents.reserve(NAGENTS * channels);
+  for(int i = 0; i < agents.capacity(); i ++) {
+    agents.push_back(Agent());
+  }
 
   double outSamples[channels * BUFFER_SIZE];
   double inSamples[channels * BUFFER_SIZE];
@@ -34,12 +38,13 @@ int main(int argc, char *argv[])
 
     for(int i = 0; i < BUFFER_SIZE; i ++) {
 
-      for(int c = 0; c < channels; c ++)
-        outSamples[c + channels * i] = 0;
+      int channel;
+      for(channel = 0; channel < channels; channel ++)
+        outSamples[channel + channels * i] = 0;
 
-      int channel = 0;
+      channel = 0;
       for(vector<Agent>::iterator it = agents.begin(); it != agents.end(); it ++) {
-        outSamples[channel + channels * i] += it->step(inSamples[channel + channel * i]);
+        outSamples[channel + channels * i] += it->step(inSamples[channel + channels * i]);
         channel = (channel + 1) % channels;      
       }
     }

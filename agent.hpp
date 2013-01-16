@@ -6,6 +6,7 @@ class Agent
 public:
   Agent();
   ~Agent();
+  Agent &operator=(const Agent &other);
   double step(const double sample);
   const int minFQ;
   const int maxFQ;
