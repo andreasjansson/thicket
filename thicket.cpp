@@ -12,7 +12,7 @@ using std::string;
 
 int main(int argc, char *argv[])
 {
-  const int NAGENTS = 40;
+  const int NAGENTS = 4;
   const int BUFFER_SIZE = 4096;
 
   if(argc < 2) {

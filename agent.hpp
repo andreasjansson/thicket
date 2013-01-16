@@ -15,6 +15,8 @@ private:
   double vel;
   double pos;
   double fq;
+  double sr;
+  double time_step;
 };
 
 #endif
